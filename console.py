@@ -140,8 +140,8 @@ class HBNBCommand(cmd.Cmd):
             param_parts = param.split('=')
 
             #Check if the parameter is in the correct format
-            if len(param_parts) ]= 2:
-                print(f"Skipping invalid parameter: {para,}")
+            if len(param_parts) ] = 2:
+                print(f"Skipping invalid parameter: {param}")
                 continue
 
             key = param_parts[0]
