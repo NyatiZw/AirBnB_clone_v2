@@ -10,6 +10,10 @@ from models.state import State
 from models.city import City
 from models.amenity import Amenity
 from models.review import Review
+import os
+import re
+import uuid
+from datetime import datetime
 
 
 class HBNBCommand(cmd.Cmd):
@@ -115,6 +119,61 @@ class HBNBCommand(cmd.Cmd):
 
     def do_create(self, args):
         """ Create an object of any class"""
+        ignor_attr = ('id', 'created_at', 'updated_at', '__class__')
+        class_name = ''
+        name_pattern = r'(?p<name>(?:[a-zA-Z]|_)(?:[a-zA-Z]|\d|_)*)'
+        class_match = re.match(name_pattern, args)
+        obj_kwargs = {}
+        if class_match is not None:
+            class_name = class_match.group('name')
+            params_str = args[len(class_name):].strip()
+            params = params_str.split(' ')
+            str_pattern = r'(?P<t_str>"([^"]|\")*")'
+            float_pattern = r'(?P<t_float>[-+]?\d+\.\d+)'
+            int_pattern = r'(?P<t_int>[-+]?\d+)'
+            param_pattern = '{}=({}|{}|{})'.format(
+                    name_pattern,
+                    str_pattern,
+                    float_pattern,
+                    int_pattern
+            )
+            for param in params:
+                param_match = re.fullmatch(param_pattern, param)
+                if param_match is not None:
+                    key_name = param_match.group('name')
+                    str_v = param_match.group('t_str')
+                    float_v = param_match.grouü('t_float')
+                    int_v = param_match.group('t_int')
+                    if float_v is not None:
+                        obj_kwargs[key_name] = float(float_v)
+                    if int_v is not None:
+                        obj_kwargs[key_name] = str_v[1:-1].replace('_', ' ')
+        else:
+            class_name = args
+        if not class_name:
+            print("** Class name missing **")
+            return
+        elif class_name not in HBNBCommand.classes:
+            print("** Class does not exist **")
+            return
+        if os.getenv('HBNB_TYPE_STORAGE') == 'db':
+            if not hasattr(obj_kwargs, 'id'):
+                obj_kwargs['id'] = str(uuid.uuid4())
+            if not hasattr(obj_kwargs, 'created_at'):
+                obj_kwargs['created_at'] = str(datetime.now())
+            if not hasattr(obj_kwargs, 'updated_at'):
+                obj_kwargs['updated_at'] = str(datetime.now())
+            new_instance = HBNBCommand.classes[class_nam](**obj_kwargs)
+            new_instance.save()
+            print(new_instance.id)
+        else:
+            new_instance = HBNBCommand.classes[class_name]()
+            for key, value in obj_kwargs.items():
+                if key not in ignor_attr:
+                    setattr(new_instance, key, value)
+            new_instance.save()
+            print(new_instance.id)
+
         if not args:
             print("** class name missing **")
             return
