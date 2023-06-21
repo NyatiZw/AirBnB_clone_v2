@@ -3,7 +3,7 @@
 import cmd
 import sys
 from models.base_model import BaseModel
-from models.__init__ import storage
+from models import storage
 from models.user import User
 from models.place import Place
 from models.state import State
@@ -121,7 +121,7 @@ class HBNBCommand(cmd.Cmd):
         """ Create an object of any class"""
         ignor_attr = ('id', 'created_at', 'updated_at', '__class__')
         class_name = ''
-        name_pattern = r'(?p<name>(?:[a-zA-Z]|_)(?:[a-zA-Z]|\d|_)*)'
+        name_pattern = r'(?P<name>(?:[a-zA-Z]|_)(?:[a-zA-Z]|\d|_)*)'
         class_match = re.match(name_pattern, args)
         obj_kwargs = {}
         if class_match is not None:
@@ -147,6 +147,8 @@ class HBNBCommand(cmd.Cmd):
                     if float_v is not None:
                         obj_kwargs[key_name] = float(float_v)
                     if int_v is not None:
+                        obj_kwagrs[key_name] = int(int_v)
+                    if str_v is not None:
                         obj_kwargs[key_name] = str_v[1:-1].replace('_', ' ')
         else:
             class_name = args
@@ -173,17 +175,6 @@ class HBNBCommand(cmd.Cmd):
                     setattr(new_instance, key, value)
             new_instance.save()
             print(new_instance.id)
-
-        if not args:
-            print("** class name missing **")
-            return
-        elif args not in HBNBCommand.classes:
-            print("** class doesn't exist **")
-            return
-        new_instance = HBNBCommand.classes[class_name](**param_dict)
-        storage.save()
-        print(new_instance.id)
-        storage.save()
 
     def help_create(self):
         """ Help information for the create method """
