@@ -1,4 +1,4 @@
 Contributors
 
-Paidamoyo Garikai <garikaipaidamoyo> \n
+Paidamoyo Garikai <garikaipaidamoyo> <br>
 Simbarashe Hanga <NyatiZw>
