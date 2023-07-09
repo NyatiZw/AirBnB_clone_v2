@@ -8,7 +8,7 @@ def do_pack():
     try:
         # Create the versions folder
         if not os.path.exist("versions"):
-            os.makedirs("versions")
+            os.mkdir("versions")
 
         #Generate th file name with the current timestamp
         current_time = datetime.now().strftime("%Y%m%d%H%M%S")
