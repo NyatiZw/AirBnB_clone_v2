@@ -11,8 +11,8 @@ import os
 def do_pack():
     """ Generate a tgz archive from the contents of a folder """
     try:
-        if not os.path.exist("versions"):
-            os.makedirs("versions")
+        if not isdir("versions") is False:
+            local("mkdir versions")
 
         #Generate th file name with the current timestamp
         current_time = datetime.now().strftime("%Y%m%d%H%M%S")
