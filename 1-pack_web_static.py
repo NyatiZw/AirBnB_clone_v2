@@ -5,7 +5,7 @@ Fabric script to generate tgz archive from the contents of web_static
 
 from datetime import datetime
 from fabric.api import local
-import os
+from os import isdir
 
 
 def do_pack():
