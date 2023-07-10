@@ -22,5 +22,5 @@ def do_pack():
         # Compress the web_static folder into the archive
         local("tar -czvf {} web_static".format(archive_path))
         return archive_path
-    except Exception as e:
+    except:
         return None

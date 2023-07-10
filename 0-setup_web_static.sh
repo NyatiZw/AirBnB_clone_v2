@@ -27,4 +27,3 @@ sudo -i '/^\s*server_name\s/ a \\\n\tlocation /hbnb_static/ {\n\t\talias /data/w
 
 # Restart Nginx
 sudo service nginx restart
-
