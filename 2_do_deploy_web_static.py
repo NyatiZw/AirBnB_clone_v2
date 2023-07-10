@@ -5,7 +5,7 @@ import os.path
 
 
 env.user = 'ubuntu'
-env.hosts = ["ip1", "ip2"]
+env.hosts = ["54.157.189.169", "54.157.141.240"]
 env.key.filename = "~/id_rsa"
 
 
