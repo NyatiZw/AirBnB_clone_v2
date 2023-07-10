@@ -11,7 +11,7 @@ from os import isdir
 def do_pack():
     """ Generate a tgz archive from the contents of a folder """
     try:
-        if not isdir("versions") is False:
+        if isdir("versions") is False:
             local("mkdir versions")
 
         #Generate th file name with the current timestamp
