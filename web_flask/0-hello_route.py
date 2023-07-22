@@ -3,7 +3,7 @@
 
 from flask import Flask
 
-app = Flask(0-hello_route)
+app = Flask("0-hello_route")
 
 
 @app.route('/', strict_slashes=False)
