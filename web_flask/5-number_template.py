@@ -24,7 +24,7 @@ def c_with_text(text):
         removes the "_" with a space
     """
     text = text.replace('_', ' ')
-    return f"C {text}"
+    return "C {}".format(text)
 
 
 @app.route('/python/', strict_slashes=False)
@@ -44,7 +44,7 @@ def number_is_interger(n):
 @app.route('/number_template/<int:n>', strict_slashes=False)
 def number_template(n):
     """ Function to display number template """
-    return render_template('5-number_template.html', n=n)
+    return render_template('5-number.html', n=n)
 
 
 if __name__ == "__main__":
