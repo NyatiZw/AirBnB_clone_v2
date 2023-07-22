@@ -41,7 +41,7 @@ def number_is_interger(n):
     return f"{n} is a number"
 
 
-@app.route('/5-number_template/<int:n>', strict_slashes=False)
+@app.route('/number_template/<int:n>', strict_slashes=False)
 def number_template(n):
     """ Function to display number template """
     return render_template('5-number_template.html', number=n)
