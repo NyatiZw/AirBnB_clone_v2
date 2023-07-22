@@ -10,5 +10,7 @@ app = Flask("0-hello_route")
 def hello_hbnb():
     """ Function that returns Hello HBNB """
     return "Hello HBNB!"
+
+
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=5000)
