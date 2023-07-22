@@ -67,11 +67,12 @@ class DBStorage:
     def reload(self):
         """Create all tables in the db and init a new session"""
         Base.metadata.create_all(self.__engine)
-        session_f = sessionmaker(bind=self.__engine,
+        session_factory = sessionmaker(bind=self.__engine,
                                  expire_on_commit=False)
-        Session = scoped_session(session_f)
+        Session = scoped_session(session_factory)
         self.__session = Session()
 
     def close(self):
         """Close the working SQLAlchemy session."""
-        self.__session.close()
+        if self.__session:
+            self.__session.remove()
