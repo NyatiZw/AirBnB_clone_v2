@@ -24,36 +24,36 @@ def c_with_text(text):
         removes the "_" with a space
     """
     text = text.replace('_', ' ')
-    return f"C {text}"
+    return "C {}".format(text)
 
 
-@app.route('/python/', defaults={'text': 'is cool'}, strict_slashes=False)
+@app.route('/python/', strict_slashes=False)
 @app.route('/python/<text>', strict_slashes=False)
-def python_with_text(text):
+def python_with_text(text="is cool"):
     """ Function to display Python and the dynamic text """
     text = text.replace('_', ' ')
-    return f"Python {text}"
+    return "Python {}".format(text)
 
 
 @app.route('/number/<int:n>', strict_slashes=False)
 def number_is_interger(n):
     """ Function to displlay number """
-    return f"{n} is a number"
+    return "{:d} is a number".format(n)
 
 
 @app.route('/number_template/<int:n>', strict_slashes=False)
 def number_template(n):
     """ Function to display number template """
-    return render_template('number_template.html', number=n)
+    return render_template('5-number.html', n=n)
 
 
 @app.route('/number_odd_or_even/<int:n>', strict_slashes=False)
 def number_odd_or_even(n):
     """ Function to display html if number even """
-    odd_or_even = 'even' if n % 2 == 0 else 'odd'
+    odd_or_even = 'even' if (n % 2 == 0) else 'odd'
     return render_template(
-        'template/6-number_odd_or_even.html',
-        number=n,
+        '6-number_odd_or_even.html',
+        n=n,
         odd_or_even=odd_or_even
     )
 
