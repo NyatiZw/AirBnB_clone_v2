@@ -60,13 +60,13 @@ def number_odd_or_even(n):
     )
 
 
-@app.teardown_appcontext
+@app.teardown_appcontext(strict_slashes=False)
 def tear_down(self):
     """remove current SQLAlchemy session"""
     storage.close()
 
 
-@app.route('/states_list')
+@app.route('/states_list', strict_slashes=False))
 def fetch_states():
     """Display html page"""
     state_objs = [s for s in storage.all("State").values()]
