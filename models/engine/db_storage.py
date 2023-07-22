@@ -39,17 +39,17 @@ class DBStorage:
     def all(self, cls=None):
         """Querring the current database session"""
         if cls is None:
-            obj = self.__session.query(State).all()
-            obj.extend(self.__session.query(City).all()
-            obj.extend(self.__session.query(User).all()
-            obj.extend(self.__session.query(Place).all()
-            obj.extend(self.__session.query(Review).all()
-            obj.extend(self.__session.query(Amenity).all()
+            objs = self.__session.query(State).all()
+            objs.extend(self.__session.query(City).all()
+            objs.extend(self.__session.query(User).all()
+            objs.extend(self.__session.query(Place).all()
+            objs.extend(self.__session.query(Review).all()
+            objs.extend(self.__session.query(Amenity).all()
         else:
             if type(cls) == str:
                 cls = eval(cls)
-            obj = self.__session.query(cls)
-        return {"{}.{}".format(type(o).__name__, o.id): o for o in obj}
+            objs = self.__session.query(cls)
+        return {"{}.{}".format(type(o).__name__, o.id): o for o in objs}
 
     def new(self, obj):
         """Adds new object to the current db session"""
@@ -64,7 +64,7 @@ class DBStorage:
         if obj is not None:
             self.__session.delete(obj)
 
-    def reload(self):$
+    def reload(self):
         """Create all tables in the db and init a new session"""
         Base.metadata.create_all(self.__engine)
         session_f = sessionmaker(bind=self.__engine,
