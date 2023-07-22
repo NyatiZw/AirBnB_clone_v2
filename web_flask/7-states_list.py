@@ -29,7 +29,7 @@ def c_with_text(text):
     return "C {}".format(text)
 
 
-@app.route('/python/', strict_slashes=False)
+@app.route('/python', strict_slashes=False)
 @app.route('/python/<text>', strict_slashes=False)
 def python_with_text(text="is cool"):
     """ Function to display Python and the dynamic text """
