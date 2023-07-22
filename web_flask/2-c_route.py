@@ -18,7 +18,11 @@ def hbnb():
 
 @app.route('/c/<text>', strict_slashes=False)
 def c_with_text(text):
+    """ Function that displays text and
+        removes the "_" with a space
+    """
     return f"C {text.replace('_', ' ')}"
+
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=5000)
