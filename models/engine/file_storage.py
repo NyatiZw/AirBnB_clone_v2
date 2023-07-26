@@ -24,9 +24,9 @@ class FileStorage:
             if type(cls) == str:
                 cls = eval(cls)
             cls_dict = {}
-            for key, value in self.__objects.items():
-                if type(value) == cls:
-                    cls_dict[key] = value
+            for k, v in self.__objects.items():
+                if type(v) == cls:
+                    cls_dict[k] = v
             return cls_dict
         return self.__objects
 
@@ -52,7 +52,8 @@ class FileStorage:
             pass
 
     def delete(self, obj=None):
-        """Delete a given object from __objects
+        """
+        Delete a given object from __objects
         If obj is equal to None do nothing
         """
         try:
