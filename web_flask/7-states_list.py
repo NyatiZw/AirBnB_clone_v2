@@ -1,5 +1,7 @@
 #!/usr/bin/python3
-'''Python Script to start a Flask web application'''
+"""
+Python Script to start a Flask web application
+"""
 
 from flask import Flask, render_template
 from models import storage
@@ -66,7 +68,7 @@ def tear_down(self):
     storage.close()
 
 
-@app.route('/states_list', strict_slashes=False))
+@app.route('/states_list', strict_slashes=False)
 def fetch_states():
     """Display html page"""
     state_objs = [s for s in storage.all("State").values()]
