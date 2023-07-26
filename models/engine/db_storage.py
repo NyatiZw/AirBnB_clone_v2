@@ -28,11 +28,11 @@ class DBStorage:
     def __init__(self):
         """Initialize a ne Database instance."""
         self.__engine = create_engine("mysql+mysqldb://{}:{}@{}/{}".
-                                     format(getenv("HBNB_MYSQL_USER"),
-                                            getenv("HBNB_MYSQL_PWD"),
-                                            getenv("HBNB_MYSQL_HOST"),
-                                            getenv("HBNB_MYSQL_DB")),
-                                     pool_pre_ping=True)
+                                      format(getenv("HBNB_MYSQL_USER"),
+                                             getenv("HBNB_MYSQL_PWD"),
+                                             getenv("HBNB_MYSQL_HOST"),
+                                             getenv("HBNB_MYSQL_DB")),
+                                      pool_pre_ping=True)
         if getenv("HBNB_ENV") == "test":
             Base.metadata.drop_all(self.__engine)
 
@@ -40,11 +40,11 @@ class DBStorage:
         """Querring the current database session"""
         if cls is None:
             objs = self.__session.query(State).all()
-            objs.extend(self.__session.query(City).all()
-            objs.extend(self.__session.query(User).all()
-            objs.extend(self.__session.query(Place).all()
-            objs.extend(self.__session.query(Review).all()
-            objs.extend(self.__session.query(Amenity).all()
+            objs.extend(self.__session.query(City).all())
+            objs.extend(self.__session.query(User).all())
+            objs.extend(self.__session.query(Place).all())
+            objs.extend(self.__session.query(Review).all())
+            objs.extend(self.__session.query(Amenity).all())
         else:
             if type(cls) == str:
                 cls = eval(cls)
@@ -68,7 +68,7 @@ class DBStorage:
         """Create all tables in the db and init a new session"""
         Base.metadata.create_all(self.__engine)
         session_factory = sessionmaker(bind=self.__engine,
-                                 expire_on_commit=False)
+                                       expire_on_commit=False)
         Session = scoped_session(session_factory)
         self.__session = Session()
 
